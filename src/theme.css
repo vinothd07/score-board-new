@@ -1,0 +1,16 @@
+/* src/theme.css */
+
+/* Dark theme */
+:root {
+  --primary-color: #246bfd; /* Change the primary color to blue (adjust as needed) */
+  --layout-header-background: #181829; /* Dark background color for the header (adjust as needed) */
+  --menu-dark-bg: #001529; /* Dark background color for the menu (adjust as needed) */
+  color: #fff;
+}
+
+/* Override Ant Design styles */
+.ant-menu-dark .ant-menu-item-selected {
+  background-color: var(--primary-color);
+}
+
+/* Add more customizations as needed */

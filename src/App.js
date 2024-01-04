@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import MainLayout from './layout/MainLayout';
+import { ConfigProvider } from 'antd';
+import storeAndPersistor from './redux/store';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider
+      theme={{
+        dark: true,
+        token: {
+          colorPrimary: '#246bfd',
+          fontFamily: "'Poppins', sans-serif"
+        },
+      }}
+    >
+      <div className='main min-h-screen bg-[--layout-header-background]'>
+        <BrowserRouter>
+          <Provider store={storeAndPersistor.store}>
+            <PersistGate loading={null} persistor={storeAndPersistor.persistor}>
+              <Routes>
+                <Route path="/" element={<MainLayout />}>
+                  <Route index path="/" element={<Home />} />
+                </Route>
+              </Routes>
+            </PersistGate>
+          </Provider>
+        </BrowserRouter>
+      </div>
+    </ConfigProvider>
   );
 }
 
